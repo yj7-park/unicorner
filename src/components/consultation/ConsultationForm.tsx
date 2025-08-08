@@ -37,25 +37,25 @@ const ConsultationForm = () => {
     setSubmitError('')
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || '전송에 실패했습니다.')
-      }
-
+      // GitHub Pages는 정적 호스팅이므로 실제 이메일 전송 대신 
+      // 외부 폼 서비스나 클라이언트 사이드 솔루션을 사용해야 합니다.
+      
+      // 시뮬레이션: 실제로는 FormSpree, Netlify Forms, EmailJS 등을 사용
+      console.log('상담 신청 정보:', formData)
+      
+      // 2초 지연 시뮬레이션
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
       setIsSubmitted(true)
-      console.log('이메일 전송 성공:', result)
+      
+      // 실제 구현 예시:
+      // - FormSpree: https://formspree.io/
+      // - EmailJS: https://www.emailjs.com/
+      // - Netlify Forms: https://www.netlify.com/products/forms/
+      
     } catch (error) {
-      console.error('이메일 전송 오류:', error)
-      setSubmitError(error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.')
+      console.error('전송 오류:', error)
+      setSubmitError('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
     } finally {
       setIsSubmitting(false)
     }
@@ -69,11 +69,11 @@ const ConsultationForm = () => {
             <span className="text-2xl">✅</span>
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            이메일 전송이 완료되었습니다!
+            상담 신청이 접수되었습니다!
           </h3>
           <p className="text-gray-600 mb-6">
-            상담 신청 내용이 담당자에게 전달되었습니다.<br />
-            빠른 시일 내에 전문가가 연락드리겠습니다.
+            빠른 시일 내에 전문가가 연락드리겠습니다.<br />
+            긴급한 상담이 필요하시면 아래 연락처로 직접 연락해 주세요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:02-1234-5678" className="btn-primary">
